@@ -2,6 +2,7 @@ import argparse
 import time
 import openai
 from github import Github
+import config
 
 
 # Function to authenticate and get GitHub repository
@@ -37,7 +38,7 @@ def fetch_repository_code(repo, path='/'):
 # Function to analyze code using ChatGPT
 def analyze_code_with_chatgpt(code):
     # Use the OpenAI API to interact with ChatGPT
-    openai.api_key = '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'
+    openai.api_key = config.api_key
     # Split the code into chunks
     code_chunks = [code[i] for i in range(0, len(code))]
     analysis_output = ""
@@ -93,7 +94,7 @@ def main(github_token, repository_url):
 
 
 if __name__ == "__main__":
-    github_token = "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"
+    github_token = config.github_token
     parser = argparse.ArgumentParser(description='Fetch code from a GitHub repository.')
     parser.add_argument('repository', help='GitHub repository in the format "owner/repo"')
     args = parser.parse_args()
